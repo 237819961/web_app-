@@ -1,0 +1,59 @@
+<%- include("header",{type:'cm'}) %>
+	<div class="container" style="width: 100%; margin-top: 10%;">
+		<form class="form create" method="post">
+			<div>
+				<label style="font-size:16px;margin: 0px;border:0;padding:0"><i class="material-icons" style="vertical-align: middle">perm_identity</i>用户名：</label> 
+				<input placeholder="请输入用户名"  class="name" type="text" name="name">
+			</div>
+			<div>
+				<label style="font-size:16px;margin: 0px;border:0;padding:0"><i class="material-icons" style="vertical-align: middle">lock</i>新密码：</label> 
+				<input placeholder="请输入新密码" class="password" type="password" name="password">
+			</div>
+			<div>
+				<label style="font-size:16px;margin: 0px;border:0;padding:0"><i class="material-icons" style="vertical-align: middle">lock</i>重复密码：</label> 
+				<input placeholder="请确认新密码" class="repeatpass" type="password" name="repeatpass">
+			</div>
+			<div class="submit"><a class="waves-effect waves-light btn" style="width: 60%;margin-left: 20%;margin-top: 10px">确认修改</a></div>
+		</form>
+	</div>
+
+<script>
+	$(window).keyup(function(e){
+			//console.log(e.keyCode)
+			if (e.keyCode == 13) {
+				$('.submit').click()
+			}
+		})
+	
+		$('.submit').click(function(){
+		
+				$.ajax({
+					url: "/cm",
+					data: {
+						name: $('input[name=name]').val(),
+						password: $('input[name=password]').val(),
+						repeatpass: $('input[name=repeatpass]').val(),
+					},
+					type: "POST",
+					cache: false,
+					dataType: 'json',
+					success: function (msg) {
+					   if(msg.code == 200){
+						   fade('修改成功')
+						   setTimeout(function(){
+							   window.location.href = "/signin"	  
+						   },1000)
+
+					   }else{
+ 							fade(msg.message)
+					   }
+					},
+					error: function () {
+						alert('异常');
+					}
+				})			
+			
+		})	
+			
+</script>
+<% include footer %>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Freedom blog</title>
+	
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="icon" href="https://timgsa.baidu.com/timg?image&quality=100&sharpen=100&er=&imgtype=0&wh_rate=null&size=h120&sec=1529674675313&di=2423c94fed65feaae9c148a9d13f6022&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fimage%2F%2570%2569%2563%2Fitem%2F377adab44aed2e73c5d705a38b01a18b87d6fa07.jpg">
+	<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+	<link rel="stylesheet" href="/index.css">
+
+
+	
+	<script> 
+		function fade(txt){
+			$('.message').text(txt)
+			$('.message').animate({
+				top:0
+			})
+			setTimeout(function(){
+				$('.message').animate({
+					top: '-100%'
+				})
+			},1500)
+		}
+		$(function(){
+			$('.signout').click(function(){
+				$.ajax({
+					url: "/signout",
+					type: "GET",
+					cache: false,
+					dataType: 'json',
+					success: function (msg) {
+						if (msg) {
+							fade('注销成功')
+							setTimeout(function(){
+								location.href = "/posts"
+							},1500)	
+						}
+					},
+					error: function () {
+						alert('异常');
+					}
+				})
+			})
+		})
+	</script>
+
+</head>
+<body background="https://img4.duitang.com/uploads/item/201602/16/20160216210814_aPNeQ.jpeg">
+
+	<nav class="white" role="navigation">
+			<div class="nav-wrapper container">
+			  <a id="logo-container" href="#" class="brand-logo">Logo</a>
+			  <ul id="nav-mobile" class="side-nav">
+					<li><div class="userView">
+							<div class="background">
+							  <img src="https://timgsa.baidu.com/timg?image&quality=100&sharpen=100&er=&imgtype=0&wh_rate=null&size=h120&sec=1529687927423&di=630d92620291afd2a4fe947bf4c8869e&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2F%2570%2569%2563%2Fitem%2Fc9fcc3cec3fdfc0347a73d37d83f8794a5c22666.jpg">
+							</div>
+							<% if(session.user){ %>
+								<a href="#!user"><img class="circle" src="images/<%= session.avator %>"></a>
+								
+						   <% } %>
+						   <% if(!session.user){ %>
+							<a href="#!user"><img class="circle" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1529826331459&di=4c733d1dc7aee806d3353693b9e39928&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D3610704133%2C3947436040%26fm%3D214%26gp%3D0.jpg"></a>
+							<a href="#!zt"><span class="white-text zt">未登录</span></a>
+							<% } %>
+							<a href="#!name"><span class="white-text name">
+								<% if(session.user){ %>
+								Hello,<%= session.user %>
+						   <% } %></span></a>
+						  </div></li>
+						
+						<div class="user_right">
+							<%  if(session.user){ %>
+								<div class="has_user">
+
+									<% if(type == 'all'){ %>
+										<a href="/posts" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;"  >全部文章</a>
+									<% }else{ %>
+										<a href="/posts" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;"  >全部文章</a>
+									<% }%>
+									<% if(type == 'my'){ %>
+										<a href="/posts?author=<%= session.user %>" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">我的文章</a>
+									<% }else{ %>
+										<a href="/posts?author=<%= session.user %>" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">我的文章</a>
+									<% }%>
+									<% if(type == 'create'){ %>
+										<a href="/create" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">发表文章</a>
+									<% }else{ %>
+										<a href="/create" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">发表文章</a>
+									<% }%>
+									<% if(type == 'cm'){ %>
+										<a href="/cm" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">修改密码</a>
+									<% }else{ %>
+										<a href="/cm" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">修改密码</a>
+									<% }%>
+									<% if(type == 'call'){ %>
+										<a href="/call" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">关于我们</a>
+											<% }else{ %>
+												<a href="/call" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">关于我们</a>
+									<% }%>
+									<% if(type == 'more'){ %>
+										<a href="/more" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">更多精彩</a>
+											<% }else{ %>
+												<a href="/more" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">更多精彩</a>
+									<% }%>
+									<a class="signout" style="margin-left: 0%;width: 100%;">注销</a>
+								</div>
+							<% } %>
+							<% if(!session.user){ %>
+								<div class="none_user has_user">
+									
+									<% if(type == 'all'){ %>
+										<a href="/posts" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;" >全部文章</a>
+									<% }else{ %>
+										<a href="/posts" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;" >全部文章</a>
+									<% }%>
+									<% if(type == 'signup'){ %>
+										<div>
+										<a href="/signup" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;"  >注册</a>
+									</div>
+										<% }else{ %>
+											<a href="/signup" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;"  >注册</a>
+									<% }%>
+									<% if(type == 'signin'){ %>
+										<a href="/signin" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">登录</a>
+											<% }else{ %>
+												<a href="/signin" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">登录</a>
+									<% }%>
+									<% if(type == 'call'){ %>
+										<a href="/call" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">关于我们</a>
+											<% }else{ %>
+												<a href="/call" class="waves-effect waves-teal btn-flat" style="margin-left: 0%;width: 100%;">关于我们</a>
+									<% }%>
+								</div>
+							<% } %>
+						</div>
+			</ul>
+			  </ul>
+			  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="large material-icons">menu</i></a>
+			</div>
+		  </nav>
+
+
+	<header>
+	
+	</header>
+<script>
+	 	(function($){
+  $(function(){
+
+    $('.button-collapse').sideNav({
+		menuWidth: 200, // Default is 240
+      edge: 'left', // Choose the horizontal origin
+      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      draggable: true // Choose whether you can drag to open on touch screens
+	});
+    $('.parallax').parallax();
+
+  }); // end of document ready
+})(jQuery); // end of jQuery name space
+</script>
