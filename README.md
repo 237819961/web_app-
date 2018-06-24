@@ -1,10 +1,5 @@
-# Koa2-blog（有问题可以加qq群:725165362）
-node+koa2+mysql (欢迎star)
-
-> 现在最新的代码有变动，请参照最新的代码，新增了上传头像、分页、markdown语法等
-
-
-教程 [Node+Koa2+Mysql 搭建简易博客](http://www.wclimb.site/2017/07/12/Node-Koa2-Mysql-%E6%90%AD%E5%BB%BA%E7%AE%80%E6%98%93%E5%8D%9A%E5%AE%A2/) 
+这个是移动开发和跨平台脚本的期末大作业
+基于html+materializecss+koa2+mysql的论坛
 
 ### 创建数据库 
 
@@ -69,30 +64,6 @@ $ npm run dev(运行项目)
 ```
 $ npm test(测试项目)
 ```
-### 演示
 
-![](http://www.wclimb.site/cdn/blog1.gif)
-
-### 注册
-
-![](http://www.wclimb.site/cdn/signup1.png)
-
-### 登陆
-
-![](http://www.wclimb.site/cdn/signin1.png)
-
-### 发表文章
-
-![](http://www.wclimb.site/cdn/create1.png)
-
-### 文章详情
-
-![](http://www.wclimb.site/cdn/postcontent1.png)
-
-### 文章列表
-
-![](http://www.wclimb.site/cdn/posts1.png)
-
-### 个人文章页以及正常编辑删除文章和评论
 
 
